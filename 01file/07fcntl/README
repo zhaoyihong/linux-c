@@ -1,0 +1,16 @@
+fcntl函数功能:操作文件描述符,改变已打开的文件的属性
+
+函数原型 : int fcntl(int fd, int cmd, ... /* arg */ );
+
+常用操作:
+    1 复制文件描述符 F_DUPFD
+    2 读取/改变文件描述符标识  F_GETFD F_SETFD
+        只有一位 F_CLOEXEC ,如果进程执行exec函数后,F_CLOEXEC位置1的文件描述符将自动关闭 
+    3 读取/改变文件状态标识    F_GETFL F_SETFL
+            1 文件权限 O_RDONLY O_WRONLY O_RDWR
+            2 创建标识 O_CREAT, O_EXCL,  O_NOCTTY,  O_TRUNC      
+    4 加锁 F_SETLK F_GETLK F_SETLKW
+
+main.cpp 中展示了复制文件描述符和改变文件状态标识的用法
+lock.cpp 中展示了添加非阻塞写锁的用法
+wlock.cpp 中展示了添加阻塞写锁的用法
