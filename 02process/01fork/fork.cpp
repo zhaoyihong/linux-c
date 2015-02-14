@@ -23,6 +23,7 @@ void err_exit(const char *msg)
 
 int main()
 {
+    //忽略子进程退出信号,防止僵尸进程出现
     signal(SIGCHLD,SIG_IGN);
 
     cout << "before fork" << endl;

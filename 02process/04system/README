@@ -1,0 +1,5 @@
+system函数的使用:
+    system调用/bin/sh -c command 来执行特定的命令,阻塞直到command返回
+    无法启动shell 返回127
+    其他错误返回-1
+    顺利执行返回命令的退出码
