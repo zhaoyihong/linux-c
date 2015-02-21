@@ -1,0 +1,20 @@
+信号发送函数  
+
+
+1  int kill(pid_t pid, int sig);
+
+pid有几种情况:
+    pid>0 将信号传给进程识别码为pid 的进程。
+    pid=0 将信号传给和目前进程相同进程组的所有进程
+    pid=-1 将信号广播传送给系统内所有的进程,1号进程和自身除外
+    pid<0 将信号传给进程组识别码为pid绝对值的所有进程
+
+
+2  int raise(int sig);
+    向自身发送信号,相当于 kill(getpid(),sig)
+
+3  int killpg(int pgrp, int sig);
+    向进程组发送信号,相当于 kill(-pgrp,sig)
+
+4  int sigqueue(pid_t pid, int sig, const union sigval value);
+    发送信号,支持排队和附加信息

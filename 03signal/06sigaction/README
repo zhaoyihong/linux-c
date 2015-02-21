@@ -1,0 +1,35 @@
+
+   int sigaction(int signum, const struct sigaction *act,
+                     struct sigaction *oldact);
+
+    signum处理的信号,act处理信号的方式,oldact原有的处理信号的方式
+
+
+       The sigaction structure is defined as something like:
+
+           struct sigaction {
+               void     (*sa_handler)(int);
+               void     (*sa_sigaction)(int, siginfo_t *, void *);
+               sigset_t   sa_mask;
+               int        sa_flags;
+               void     (*sa_restorer)(void);
+           };
+
+
+    sa_handler  和 sa_sigaction都是处理函数,只需要设置一个
+        sa_handler是简单的处理函数, sa_sigaction可以附加额外的信息
+    sa_mask 在处理信号signum时,如果sa_mask中已添加的信号来临,则被阻塞.
+        另外被处理的信号自身也会被自动放入sa_mask中
+    flgas 指定信号处理的行为,它可以是以下值的“按位或”组合
+         SA_RESTART：使被信号打断的系统调用自动重新发起。
+         SA_NOCLDSTOP：使父进程在它的子进程暂停或继续运行时不会收到 SIGCHLD 信号。
+         SA_NOCLDWAIT：使父进程在它的子进程退出时不会收到 SIGCHLD 信号，这时子进程如果退出也不会成为僵尸进程。
+         SA_NODEFER：使对信号的屏蔽无效，即在信号处理函数执行期间仍能发出这个信号。
+         SA_RESETHAND：信号处理之后重新设置为默认的处理方式。
+         SA_SIGINFO：使用 sa_sigaction 成员而不是 sa_handler 作为信号处理函数。
+
+
+    sigaction 和 sigprocmask中阻塞的区别是:
+        sigaction 只在处理信号时阻塞,sigprocmask是任意时候都阻塞
+
+

@@ -1,0 +1,9 @@
+更多的发送信号函数
+
+1 unsigned int alarm(unsigned int seconds);
+     发送SIGALRM函数
+
+2 setitimer
+
+3 abort 
+    发送 SIGABRT信号
